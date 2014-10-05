@@ -36,7 +36,11 @@ public class NovaSolicitacao extends Status {
     public void cancelar() {
         throw new IllegalStateException("Uma nova solicitação não pode ser cancelada. Solicite à sua chefia o cancelamento.");
     }
-    
+
+    @Override
+    public void estornarAprovacao() {
+        throw new IllegalStateException("É permitido estornar apenas solicitações já aprovadas pelo RH.");
+    }    
 
     @Override
     public int hashCode() {

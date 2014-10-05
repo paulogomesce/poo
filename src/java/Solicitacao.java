@@ -29,17 +29,19 @@ public class Solicitacao implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date inicio;
+    
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date termino;
+    
     @Lob
     private String motivo;
+    
     @Lob
     private String observacao;
     
     @Enumerated(EnumType.ORDINAL)
-    private EnumTipoSolicitacao tipoSolicitacao;
-    
+    private EnumTipoSolicitacao tipoSolicitacao;    
     
     @OneToOne
     private Status status = new NovaSolicitacao();
@@ -99,7 +101,16 @@ public class Solicitacao implements Serializable {
     public Status getStatus() {
         return status;
     }
+    
+    public EnumTipoSolicitacao getTipoSolicitacao() {
+        return tipoSolicitacao;
+    }
 
+    public void setTipoSolicitacao(EnumTipoSolicitacao tipoSolicitacao) {
+        this.tipoSolicitacao = tipoSolicitacao;
+    }
+    
+    /*Declaração dos métodos*/
     public void solicitar() {
         this.status.setSolicitacao(this);
         this.status.solicitar();
@@ -129,15 +140,12 @@ public class Solicitacao implements Serializable {
         this.status.cancelar();
         save(this);
     }
-
-    public EnumTipoSolicitacao getTipoSolicitacao() {
-        return tipoSolicitacao;
-    }
-
-    public void setTipoSolicitacao(EnumTipoSolicitacao tipoSolicitacao) {
-        this.tipoSolicitacao = tipoSolicitacao;
-    }
     
+    public void estornarAprovacao(){
+        this.status.setSolicitacao(this);
+        this.status.estornarAprovacao();
+        save(this);        
+    }   
     
 
     @Override

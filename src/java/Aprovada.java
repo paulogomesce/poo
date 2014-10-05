@@ -35,6 +35,11 @@ public class Aprovada extends Status {
     @Override
     public void cancelar() {
         this.solicitacao.setStatus(new Cancelada());
+    }
+    
+    @Override
+    public void estornarAprovacao() {
+        this.solicitacao.setStatus(new AguardandoRH());
     }    
 
     @Override

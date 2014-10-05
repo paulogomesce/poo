@@ -35,6 +35,12 @@ public class AguardandoChefia extends Status {
     }
 
     @Override
+    public void estornarAprovacao() {
+        throw new IllegalStateException("É permitido estornar apenas solicitações já aprovadas pelo RH.");
+    }    
+    
+    /*Métodos HashCode, equals e toString*/
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + (int) (this.codigo ^ (this.codigo >>> 32));

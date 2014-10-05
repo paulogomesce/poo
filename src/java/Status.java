@@ -31,6 +31,8 @@ public abstract class Status implements Serializable {
     abstract public void retornar();
     
     abstract public void cancelar();
+    
+    abstract public void estornarAprovacao();
 
     @Override
     public int hashCode() {

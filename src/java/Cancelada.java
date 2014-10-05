@@ -36,6 +36,11 @@ public class Cancelada extends Status{
     }
     
     @Override
+    public void estornarAprovacao() {
+        throw new IllegalStateException("É permitido estornar apenas solicitações já aprovadas pelo RH.");
+    }    
+    
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + (int) (this.codigo ^ (this.codigo >>> 32));

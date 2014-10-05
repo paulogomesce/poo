@@ -35,6 +35,10 @@ public class AguardandoRH extends Status {
         this.solicitacao.setStatus(new Cancelada());
     }
     
+    @Override
+    public void estornarAprovacao() {
+        throw new IllegalStateException("É permitido estornar apenas solicitações já aprovadas pelo RH.");
+    }    
 
     @Override
     public int hashCode() {
