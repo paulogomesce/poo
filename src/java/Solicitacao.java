@@ -57,6 +57,7 @@ public class Solicitacao implements Serializable {
     private String observacao;
     
     @Enumerated(EnumType.ORDINAL)
+    @Column(updatable = false)
     private EnumTipoSolicitacao tipoSolicitacao;    
     
     @OneToOne
