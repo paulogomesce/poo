@@ -5,7 +5,6 @@ import entities.annotations.EntityDescriptor;
 import entities.annotations.View;
 import entities.annotations.Views;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -15,11 +14,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
-import javax.persistence.Version;
 
 @EntityDescriptor(template = "@TABLE_CRUDE")
 @Entity
@@ -30,39 +26,13 @@ import javax.persistence.Version;
                   + " #funcionario;"
                   + " #inicio;"
                   + " #termino;"
-                  + " #motivo;"
+                  + " #observacao;"
                   + " #tipoSolicitacao;"
                   + " *status;"
                   + " solicitar()]",
           namedQuery = "Select new Solicitacao()",
-          template = "@CRUD_PAGE"),
-    @View(name = "AprovacaoDaChefia",       
-                title = "Analisar Solicitações",  
-                namedQuery = "SolicitacoesAguardandoChefia",     
-                members = "[*funcionario:2;*inicio,*termino;*motivo,*observacao],[aprovar();recusar()]",
-          template = "@CRUD_PAGE"),
-    @View(name = "AbonarFaltas",       
-                 title = "Abonar Faltas",  
-                 namedQuery = "SolicitacoesAguardandoRH",     
-                 members = "[*funcionario;*inicio;*termino],*observacao,[aprovar();recusar();retornar()]",
-          template = "@CRUD_PAGE"),
-    @View(name = "EstornarAprovacao",       
-                 title = "Estornar Aprovação",  
-                 namedQuery = "SolicitacoesAprovadas",     
-                 members = "[*funcionario;*inicio;*termino],*observacao,[estornarAprovacao()]",
           template = "@CRUD_PAGE")
     })
-@NamedQueries({    
-    @NamedQuery(             
-            name = "SolicitacoesAguardandoChefia",            
-            query = "Select s  From Solicitacao s, AguardandoChefia st Where s.status = st"),     
-    @NamedQuery(             
-            name = "SolicitacoesAguardandoRH",             
-            query = "Select s  From Solicitacao s, AguardandoRH st Where s.status = st"),
-    @NamedQuery(             
-            name = "SolicitacoesAprovadas",             
-            query = "Select s  From Solicitacao s, Aprovada st Where s.status = st") 
-})
 public class Solicitacao implements Serializable {
 
     @Id @GeneratedValue
@@ -92,9 +62,6 @@ public class Solicitacao implements Serializable {
     
     @OneToOne
     private Status status = new NovaSolicitacao();
-    
-    @Version      
-    private Timestamp version;
 
     public Long getCodigo() {
         return codigo;
