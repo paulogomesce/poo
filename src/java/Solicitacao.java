@@ -123,15 +123,17 @@ public class Solicitacao implements Serializable {
         save(this);
     }
 
-    public void recusar() {
+    public void recusar(String motivo) {
         this.status.setSolicitacao(this);
         this.status.recusar();
+        this.motivo = motivo;
         save(this);
     }
 
-    public void retornar() {
+    public void retornar(String motivo) {
         this.status.setSolicitacao(this);
         this.status.retornar();
+        this.motivo = motivo;
         save(this);
     }
     

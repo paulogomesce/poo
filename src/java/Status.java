@@ -1,6 +1,3 @@
-
-
-import static entities.RepositoryAtomic.save;
 import entities.annotations.EntityDescriptor;
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-//@EntityDescriptor(hidden = true)
+@EntityDescriptor(hidden = true)
 @Entity
 public abstract class Status implements Serializable {
 
