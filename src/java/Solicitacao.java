@@ -2,6 +2,8 @@
 
 import static entities.RepositoryAtomic.save;
 import entities.annotations.EntityDescriptor;
+import entities.annotations.View;
+import entities.annotations.Views;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -17,6 +19,20 @@ import javax.persistence.Temporal;
 
 @EntityDescriptor(template = "@TABLE_CRUDE")
 @Entity
+@Views({
+    @View(title = "Nova Solicitação",
+          name = "novaSolicitacao",
+          members = "[codigo;"
+                  + " #funcionario;"
+                  + " #inicio;"
+                  + " #termino;"
+                  + " #observacao;"
+                  + " #tipoSolicitacao;"
+                  + " *status;"
+                  + " solicitar()]",
+          namedQuery = "Select new Solicitacao()",
+          template = "@CRUD_PAGE")
+    })
 public class Solicitacao implements Serializable {
 
     @Id @GeneratedValue
